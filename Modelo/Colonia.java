@@ -7,19 +7,7 @@ public class Colonia {
     private String municipio;
     private String estado;
 
-    public Colonia(int idColonia, String nombre, String codigoPostal, String municipio, String estado) {
-        this.idColonia = idColonia;
-        this.nombre = nombre;
-        this.codigoPostal = codigoPostal;
-        this.municipio = municipio;
-        this.estado = estado;
-    }
-
-    public Colonia() {
-    }
-    
-    
-
+    // Getters y Setters
     public int getIdColonia() {
         return idColonia;
     }
@@ -59,6 +47,4 @@ public class Colonia {
     public void setEstado(String estado) {
         this.estado = estado;
     }
-    
-    
 }

@@ -2,27 +2,16 @@
 package Modelo;
 
 import java.util.Date;
+import java.sql.Time;
 
 public class Actividad {
     private int idActividad;
     private String descripcion;
     private Date fecha;
-    private String hora;
+    private Time hora;
     private String evidenciaImagen;
 
-    public Actividad(int idActividad, String descripcion, Date fecha, String hora, String evidenciaImagen) {
-        this.idActividad = idActividad;
-        this.descripcion = descripcion;
-        this.fecha = fecha;
-        this.hora = hora;
-        this.evidenciaImagen = evidenciaImagen;
-    }
-
-    public Actividad() {
-    }
-    
-    
-
+    // Getters y Setters
     public int getIdActividad() {
         return idActividad;
     }
@@ -47,11 +36,11 @@ public class Actividad {
         this.fecha = fecha;
     }
 
-    public String getHora() {
+    public Time getHora() {
         return hora;
     }
 
-    public void setHora(String hora) {
+    public void setHora(Time hora) {
         this.hora = hora;
     }
 
@@ -62,5 +51,4 @@ public class Actividad {
     public void setEvidenciaImagen(String evidenciaImagen) {
         this.evidenciaImagen = evidenciaImagen;
     }
-    
 }

@@ -1,50 +1,58 @@
 package Controlador;
-
+import FactoryMethod.EntityFactory;
+import FactoryMethod.GeneralEntityFactory;
 import Modelo.Actividad;
 import Modelo.ActividadDAO;
-
+import java.sql.Date;
 import java.sql.SQLException;
-import java.util.Date;
+import java.sql.Time;
 import java.util.List;
-import javax.swing.JFileChooser;
-import java.io.File;
 
 public class ActividadController {
+    private EntityFactory factory;
     private ActividadDAO actividadDAO;
 
-    public ActividadController() {
-        try {
-            actividadDAO = new ActividadDAO();
-        } catch (SQLException e) {
-            System.err.println("Error al inicializar ActividadDAO: " + e.getMessage());
-        }
+    public ActividadController() throws SQLException {
+        this.factory = new GeneralEntityFactory();
+        this.actividadDAO = new ActividadDAO();
     }
+    
+    public boolean agregarActividad(String descripcion, Date fecha, Time hora, String evidenciaImagen) {
+    Actividad actividad = (Actividad) factory.crearEntidad("Actividad");
+    actividad.setDescripcion(descripcion);
+    actividad.setFecha(fecha);
+    actividad.setHora(hora);
+    actividad.setEvidenciaImagen(evidenciaImagen);
 
-    // Método para seleccionar una imagen y obtener su ruta
-    public String seleccionarImagen() {
-        JFileChooser fileChooser = new JFileChooser();
-        fileChooser.setDialogTitle("Selecciona una imagen de evidencia");
+    return actividadDAO.insertarActividad(actividad);
+}
 
-        int result = fileChooser.showOpenDialog(null);
-        if (result == JFileChooser.APPROVE_OPTION) {
-            File selectedFile = fileChooser.getSelectedFile();
-            return selectedFile.getAbsolutePath();
-        }
-        return null; // Si no se selecciona ninguna imagen
-    }
 
-    // Método para agregar una nueva actividad con la ruta de la imagen
-    public boolean agregarActividad(String descripcion, Date fecha, String hora, String evidenciaImagen) {
-        Actividad actividad = new Actividad();
+    public boolean crearActividad(String descripcion, Date fecha, Time hora, String evidenciaImagen) {
+        Actividad actividad = (Actividad) factory.crearEntidad("Actividad");
         actividad.setDescripcion(descripcion);
         actividad.setFecha(fecha);
         actividad.setHora(hora);
         actividad.setEvidenciaImagen(evidenciaImagen);
 
-        return actividadDAO.crearActividad(actividad);
+        return actividadDAO.insertarActividad(actividad);
     }
 
-    // Método para listar todas las actividades
+    public boolean actualizarActividad(int id, String descripcion, Date fecha, Time hora, String evidenciaImagen) {
+        Actividad actividad = (Actividad) factory.crearEntidad("Actividad");
+        actividad.setIdActividad(id);
+        actividad.setDescripcion(descripcion);
+        actividad.setFecha(fecha);
+        actividad.setHora(hora);
+        actividad.setEvidenciaImagen(evidenciaImagen);
+
+        return actividadDAO.actualizarActividad(actividad);
+    }
+
+    public boolean eliminarActividad(int idActividad) {
+        return actividadDAO.eliminarActividad(idActividad);
+    }
+
     public List<Actividad> listarActividades() {
         return actividadDAO.listarActividades();
     }
