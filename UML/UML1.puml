@@ -1,0 +1,54 @@
+@startuml
+title Sistema de Gestión de Actividades de Limpieza
+
+class Administrador {
+    - idAdministrador: Integer
+    - usuario: String
+    - contraseña: String
+    + iniciarSesion()
+    + cerrarSesion()
+}
+
+class Actividad {
+    - idActividad: Integer
+    - descripcion: String
+    - fecha: Date
+    - hora: Time
+    - evidenciaImagen: Image
+    + registrarActividad()
+    + modificarActividad()
+    + eliminarActividad()
+}
+
+class Colonia {
+    - idColonia: Integer
+    - nombre: String
+    - codigoPostal: String
+    - municipio: String
+    - estado: String
+    + buscarColonia()
+}
+
+class Cuadrilla {
+    - idCuadrilla: Integer
+    - nombreCuadrilla: String
+    + asignarActividad()
+    + consultarActividades()
+}
+
+class JefeCuadrilla {
+    - idJefe: Integer
+    - nombre: String
+    - cuadrillaAsignada: String
+    + asignarCuadrilla()
+    + consultarEquipo()
+}
+
+Administrador --> Actividad : gestiona
+Administrador --> Colonia : gestiona
+Actividad --> Colonia : "atendida"
+Cuadrilla --> Actividad : realiza
+JefeCuadrilla --> Cuadrilla : dirige
+@enduml
+
+

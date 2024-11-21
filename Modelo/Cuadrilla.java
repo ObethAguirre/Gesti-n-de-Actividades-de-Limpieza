@@ -32,4 +32,8 @@ public class Cuadrilla {
         this.nombreCuadrilla = nombreCuadrilla;
     }
     
+    @Override
+public String toString() {
+    return this.nombreCuadrilla; // Devuelve el nombre de la cuadrilla
+}
 }
